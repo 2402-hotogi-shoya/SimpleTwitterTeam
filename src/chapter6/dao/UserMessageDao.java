@@ -26,7 +26,8 @@ public class UserMessageDao {
 			sql.append(" messages.user_id as user_id, ");
 			sql.append(" users.account as account, ");
 			sql.append(" users.name as name, ");
-			sql.append(" messages.created_date as created_date ");  sql.append("FROM messages ");
+			sql.append(" messages.created_date as created_date ");
+			sql.append("FROM messages ");
 			sql.append("INNER JOIN users ");
 			sql.append("ON messages.user_id = users.id ");
 			sql.append("WHERE messages.created_date BETWEEN ? AND ? ");
@@ -40,6 +41,7 @@ public class UserMessageDao {
 			}
 
 			sql.append("ORDER BY created_date DESC limit " + num);
+
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, start);
 			ps.setString(2, end);
@@ -53,6 +55,7 @@ public class UserMessageDao {
 			} else {
 				if (!StringUtils.isBlank(searchWord)) {
 					ps.setString(3, "%" + searchWord + "%");
+
 				}
 			}
 
