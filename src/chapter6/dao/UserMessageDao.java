@@ -49,13 +49,16 @@ public class UserMessageDao {
 			if(userId != null) {
 				ps.setInt(3, userId);
 
-				if (!StringUtils.isBlank(searchWord)) {
+				if (likeSearch.equals("startFrom")) {
+					ps.setString(4, searchWord + "%");
+				} else {
 					ps.setString(4, "%" + searchWord + "%");
 				}
 			} else {
-				if (!StringUtils.isBlank(searchWord)) {
+				if (likeSearch.equals("startFrom")) {
+					ps.setString(3, searchWord + "%");
+				} else {
 					ps.setString(3, "%" + searchWord + "%");
-
 				}
 			}
 
